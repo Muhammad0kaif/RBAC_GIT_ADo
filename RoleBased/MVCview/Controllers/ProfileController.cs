@@ -1,38 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVCview.Services;
 using PocoClasses.Dto;
-using System.Net.Http.Headers;
+
 
 namespace MVCview.Controllers
 {
-    public class ProfileController : Controller
+    public class ProfileController(ApiClientService apiClient) : Controller
     {
         public async Task<IActionResult> Profile()
         {
             var token = HttpContext.Session.GetString("token");
 
             if (string.IsNullOrEmpty(token))
-                return RedirectToAction("Login", "Account");
-
-            UserDto user = null;
-
-            using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
-
-                var response = await client.GetAsync(
-                    "https://localhost:7050/api/Users/profile");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    user = await response.Content.ReadFromJsonAsync<UserDto>();
-                }
+                return RedirectToAction("Login", "Account");
             }
 
-            if (user == null)
-                return RedirectToAction("Login", "Account");
+            var apiResult = await apiClient.GetAsync<UserDto>(
+                "/api/Users/profile");
 
-            return View(user);
+            if (!apiResult.Success)
+            {
+                TempData["Error"] = apiResult.Error;
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(apiResult.Data);
         }
 
         [HttpGet]
@@ -41,28 +34,20 @@ namespace MVCview.Controllers
             var token = HttpContext.Session.GetString("token");
 
             if (string.IsNullOrEmpty(token))
-                return RedirectToAction("Login", "Account");
-
-            UserDto user = null;
-
-            using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
-
-                var response = await client.GetAsync(
-                    "https://localhost:7050/api/Users/profile");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    user = await response.Content.ReadFromJsonAsync<UserDto>();
-                }
+                return RedirectToAction("Login", "Account");
             }
 
-            if (user == null)
-                return RedirectToAction("Login", "Account");
+            var apiResult = await apiClient.GetAsync<UserDto>(
+                "/api/Users/profile");
 
-            return View(user);
+            if (!apiResult.Success)
+            {
+                TempData["Error"] = apiResult.Error;
+                return RedirectToAction("Profile");
+            }
+
+            return View(apiResult.Data);
         }
 
         [HttpPost]
@@ -75,38 +60,18 @@ namespace MVCview.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            try
+            var apiResult = await apiClient.PutAsync<string>(
+                "/api/Users/update-profile",
+                model);
+
+            if (apiResult.Success)
             {
-                using var client = new HttpClient();
-
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
-
-                var response = await client.PutAsJsonAsync(
-                    "https://localhost:7050/api/Users/update-profile",
-                    model);
-
-                var responseText = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["Success"] = "Profile updated successfully.";
-                    return RedirectToAction("Index", "Home");
-                }
-
-                ViewBag.Error = responseText;
-                return View(model);
+                TempData["Success"] = "Profile updated successfully.";
+                return RedirectToAction("Index", "Home");
             }
-            catch (HttpRequestException)
-            {
-                ViewBag.Error = "API server is not running. Please start AdoApi2.";
-                return View(model);
-            }
-            catch (Exception)
-            {
-                ViewBag.Error = "Something went wrong while updating profile.";
-                return View(model);
-            }
+
+            ViewBag.Error = apiResult.Error;
+            return View(model);
         }
 
         [HttpGet]
@@ -114,6 +79,8 @@ namespace MVCview.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordDto model)
         {
@@ -135,41 +102,22 @@ namespace MVCview.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            try
+            var apiResult = await apiClient.PostAsync<string>(
+                "/api/Users/change-password",
+                model);
+
+            if (apiResult.Success)
             {
-                using var client = new HttpClient();
+                HttpContext.Session.SetString("mustChangePassword", "False");
 
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
-
-                var response = await client.PostAsJsonAsync(
-                    "https://localhost:7050/api/Users/change-password",
-                    model);
-
-                var responseText = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    HttpContext.Session.SetString("mustChangePassword", "False");
-
-                    TempData["Success"] = "Password changed successfully.";
-                    return RedirectToAction("Index", "Home");
-                }
-
-                ViewBag.Error = responseText;
-                return View(model);
+                TempData["Success"] = "Password changed successfully.";
+                return RedirectToAction("Index", "Home");
             }
-            catch (HttpRequestException)
-            {
-                ViewBag.Error = "API server is not running. Please start AdoApi2.";
-                return View(model);
-            }
-            catch (Exception)
-            {
-                ViewBag.Error = "Something went wrong while changing password.";
-                return View(model);
-            }
+
+            ViewBag.Error = apiResult.Error;
+            return View(model);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> UploadProfilePicture(Guid userId, IFormFile file)
@@ -187,49 +135,19 @@ namespace MVCview.Controllers
                 return RedirectToAction("Profile");
             }
 
-            try
+            var apiResult = await apiClient.UploadFileAsync(
+                $"/api/Users/{userId}/upload",
+                file);
+
+            if (apiResult.Success)
             {
-                using var client = new HttpClient();
-
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
-
-                using var form = new MultipartFormDataContent();
-
-                using var stream = file.OpenReadStream();
-
-                var fileContent = new StreamContent(stream);
-
-                fileContent.Headers.ContentType =
-                    new MediaTypeHeaderValue(file.ContentType);
-
-                form.Add(fileContent, "file", file.FileName);
-
-                var response = await client.PostAsync(
-                    $"https://localhost:7050/api/Users/{userId}/upload",
-                    form);
-
-                var responseText = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["Success"] = "Profile picture updated successfully.";
-                    return RedirectToAction("Profile");
-                }
-
-                TempData["Error"] = responseText;
+                TempData["Success"] = "Profile picture updated successfully.";
                 return RedirectToAction("Profile");
             }
-            catch (HttpRequestException)
-            {
-                TempData["Error"] = "API server is not running. Please start AdoApi2.";
-                return RedirectToAction("Profile");
-            }
-            catch (Exception)
-            {
-                TempData["Error"] = "Something went wrong while uploading profile picture.";
-                return RedirectToAction("Profile");
-            }
+
+            TempData["Error"] = apiResult.Error;
+            return RedirectToAction("Profile");
         }
+
     }
 }

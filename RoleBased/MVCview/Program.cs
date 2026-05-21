@@ -12,9 +12,9 @@ namespace MVCview
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();
             builder.Services.AddHttpContextAccessor();
-
             builder.Services.AddScoped<TokenService>();
-            
+            builder.Services.AddScoped<ApiClientService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

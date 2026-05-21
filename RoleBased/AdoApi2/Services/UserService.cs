@@ -6,7 +6,7 @@ using PocoClasses.Dto;
 
 namespace AdoApi2.Services
 {
-    public class UserService(IUserRepository repo, EmailService emailService)
+    public class UserService(IUserRepository repo, IEmailService emailService, IEmailTemplateService emailTemplateService, IPasswordService passwordService)
     {
         private readonly IUserRepository _repo = repo;
 
@@ -20,22 +20,30 @@ namespace AdoApi2.Services
         {
             return _repo.UpdateProfilePicture(userId, filePath);
         }
+
+        public Task UpdateProfile(Guid userId, string name, string email)
+        {
+            return _repo.UpdateProfile(userId, name, email);
+        }
+
+        public Task UpdateUserByAdmin(Guid userId, string name, string email,int roleId)
+        {
+            return _repo.UpdateUserByAdmin(userId, name, email, roleId);
+        }
         public async Task CreateUserByAdmin(User user)
         {
-            var tempPassword = GenerateTemporaryPassword();
+            var tempPassword = passwordService.GenerateTemporaryPassword();
 
             user.Id = Guid.NewGuid();
-            user.Password = PasswordHelper.Hash(tempPassword);
+            user.Password = passwordService.HashPassword(tempPassword);
             user.MustChangePassword = true;
 
             await _repo.CreateUser(user);
 
-            var body = $@"
-            <h3>Welcome, {user.Name}</h3>
-            <p>Your account has been created.</p>
-            <p><strong>Email:</strong> {user.Email}</p>
-            <p><strong>Temporary Password:</strong> {tempPassword}</p>
-            <p>Please login and change your password immediately.</p>";
+            var loginUrl = "https://localhost:7196/Account/Login";
+
+            var body = emailTemplateService.BuildNewUserEmail(user.Name, user.Email,tempPassword,loginUrl);
+
 
             await emailService.SendEmailAsync( user.Email, "Your account has been created", body);
         }
@@ -47,16 +55,13 @@ namespace AdoApi2.Services
             if (user == null)
                 return false;
 
-            var passwordHash = PasswordHelper.Hash(dto.NewPassword);
+            var passwordHash = passwordService.HashPassword(dto.NewPassword);
 
             await _repo.UpdatePassword( userId, passwordHash, false);
 
             return true;
         }
 
-        private static string GenerateTemporaryPassword()
-        {
-            return $"Temp@{Guid.NewGuid().ToString("N")[..8]}1";
-        }
+       
     }
 }

@@ -3,21 +3,13 @@ using System.Net.Http.Headers;
 
 namespace MVCview.Services
 {
-    public class TokenService
+    public class TokenService(IHttpContextAccessor httpContextAccessor)
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-
-        public TokenService(IHttpContextAccessor httpContextAccessor)
-        {
-            this.httpContextAccessor = httpContextAccessor;
-        }
-
         public async Task<bool> RefreshAccessToken()
         {
             var session = httpContextAccessor.HttpContext.Session;
 
-            var refreshToken =
-                session.GetString("refreshToken");
+            var refreshToken = session.GetString("refreshToken");
 
             using (var client = new HttpClient())
             {
@@ -32,7 +24,8 @@ namespace MVCview.Services
                 var result = await response.Content
                     .ReadFromJsonAsync<RefreshResponse>();
 
-                session.SetString("token", result.accessToken); session.SetString("refreshToken", result.refreshToken);
+                session.SetString("token", result.accessToken); 
+                session.SetString("refreshToken", result.refreshToken);
                 return true;
             }
         }

@@ -115,7 +115,6 @@ namespace AdoApi2
             builder.Services.AddScoped<ReportService>();
             builder.Services.AddScoped<UserService>();
             builder.Services.AddScoped<OrderService>();
-            builder.Services.AddScoped<EmailService>();
             builder.Services.AddScoped<AuditLogService>();
             builder.Services.AddScoped<AuditLogFilter>();
 
@@ -126,6 +125,11 @@ namespace AdoApi2
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+
+            //Service Interfaces
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<IEmailTemplateService, EmailTemplateService>();
+            builder.Services.AddScoped<IPasswordService, PasswordService>();
 
             // DB Factory
             builder.Services.AddSingleton<DbConnectionFactory>(sp =>

@@ -1,9 +1,10 @@
-﻿using System.Net;
+﻿using AdoApi2.Repositories.Interfaces;
+using System.Net;
 using System.Net.Mail;
 
 namespace AdoApi2.Services
 {
-    public class EmailService(IConfiguration configuration)
+    public class EmailService(IConfiguration configuration) : IEmailService
     {
         public async Task SendEmailAsync( string to, string subject,string body)
         {

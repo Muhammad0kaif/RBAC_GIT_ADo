@@ -1,18 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCview.Models;
-using System.Data;
+using MVCview.Services;
+using PocoClasses;
 using System.Net.Http.Headers;
 using System.Text.Json;
-using PocoClasses;
 
 namespace MVCview.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController(ApiClientService apiClient) : Controller
     {
-        
-
-
-        [HttpGet]
         [HttpGet]
         public async Task<IActionResult> Users()
         {
@@ -37,39 +33,15 @@ namespace MVCview.Controllers
 
             ViewBag.Permissions = permissions;
 
-            var token = HttpContext.Session.GetString("token");
+            var apiResult = await apiClient.GetAsync<List<UserDto>>("/api/Users/get-users");
 
-            List<UserDto> users = new();
-
-            using (var client = new HttpClient())
+            if (!apiResult.Success)
             {
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
-
-                var response = await client.GetAsync(
-                    "https://localhost:7050/api/Users/get-users");
-
-                var responseText = await response.Content.ReadAsStringAsync();
-
-                Console.WriteLine("USERS API STATUS => " + response.StatusCode);
-                Console.WriteLine("USERS API RESPONSE => " + responseText);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    ViewBag.Error = responseText;
-                    return View(new List<UserDto>());
-                }
-
-                users = JsonSerializer.Deserialize<List<UserDto>>(
-                    responseText,
-                    new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    }
-                ) ?? new List<UserDto>();
+                ViewBag.Error = apiResult.Error;
+                return View(new List<UserDto>());
             }
 
-            return View(users);
+            return View(apiResult.Data ?? new List<UserDto>());
         }
 
         [HttpPost]
@@ -83,38 +55,17 @@ namespace MVCview.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            try
+            var apiResult = await apiClient.PostAsync<string>( "/api/Users/create-user", model);
+
+            if (apiResult.Success)
             {
-                using var client = new HttpClient();
-
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
-
-                var response = await client.PostAsJsonAsync(
-                    "https://localhost:7050/api/Users/create-user",
-                    model);
-
-                var responseText = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["Success"] = "User created successfully.";
-                    return RedirectToAction("Users");
-                }
-
-                ViewBag.Error = responseText;
-                return View(model);
+                TempData["Success"] = "User created successfully.";
+                return RedirectToAction("Users");
             }
-            catch (HttpRequestException)
-            {
-                ViewBag.Error = "API server is not running. Please start AdoApi2.";
-                return View(model);
-            }
-            catch (Exception)
-            {
-                ViewBag.Error = "Something went wrong while creating user.";
-                return View(model);
-            }
+
+            ViewBag.Error = apiResult.Error;
+            return View(model);
+
         }
 
         [HttpGet]
@@ -158,34 +109,15 @@ namespace MVCview.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            try
+            var apiResult = await apiClient.DeleteAsync<string>($"/api/Users/delete-user/{id}");
+
+            if (apiResult.Success)
             {
-                using var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
-
-                var response = await client.DeleteAsync(
-                    $"https://localhost:7050/api/Users/delete-user/{id}");
-                var responseText = await response.Content.ReadAsStringAsync();
-
-                var error = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["Success"] = "User deleted successfully.";
-                }
-                else
-                {
-                    TempData["Error"] = responseText;
-                }
+                TempData["Success"] = "User deleted successfully.";
             }
-            catch (HttpRequestException)
+            else
             {
-                TempData["Error"] = "API server is not running. Please start AdoApi2.";
-            }
-            catch (Exception)
-            {
-                TempData["Error"] = "Something went wrong while deleting user.";
+                TempData["Error"] = apiResult.Error;
             }
 
             return RedirectToAction("Users");

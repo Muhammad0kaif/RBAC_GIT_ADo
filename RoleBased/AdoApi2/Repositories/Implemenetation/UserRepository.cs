@@ -118,5 +118,30 @@ namespace AdoApi2.Repositories.Implemenetation
 
             await ExecuteNonQuery(cmd);
         }
+
+        public async Task UpdateProfile(Guid userId, string name, string email)
+        {
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_UpdateProfile", conn);
+
+            cmd.Parameters.AddWithValue("@Id", userId);
+            cmd.Parameters.AddWithValue("@Name", name);
+            cmd.Parameters.AddWithValue("@Email", email);
+
+            await ExecuteNonQuery(cmd);
+        }
+
+        public async Task UpdateUserByAdmin( Guid userId,string name, string email, int roleId)
+        {
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_UpdateUserByAdmin", conn);
+
+            cmd.Parameters.AddWithValue("@Id", userId);
+            cmd.Parameters.AddWithValue("@Name", name);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@RoleId", roleId);
+
+            await ExecuteNonQuery(cmd);
+        }
     }
 }

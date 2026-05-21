@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Lu9WW8Bzv/8=",
+  "dgSpecHash": "/aHeA1djTAg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\git clone practice\\TaskByMentor\\RoleBased\\AdoApi2\\AdoApi2.csproj",
+  "projectFilePath": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\AdoApi2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MD KAIF ANSARI\\.nuget\\packages\\bcrypt.net-next\\4.2.0\\bcrypt.net-next.4.2.0.nupkg.sha512",
     "C:\\Users\\MD KAIF ANSARI\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.8\\microsoft.aspnetcore.authentication.jwtbearer.10.0.8.nupkg.sha512",

@@ -49,9 +49,10 @@ namespace AdoApi2.Controllers
             if (!Guid.TryParse(userIdClaim, out Guid userId))
                 return Unauthorized();
 
-            user.Id = userId;
+            if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Email))
+                return BadRequest("Name and Email are required");
 
-            await service.UpdateUser(user);
+            await service.UpdateProfile(userId, user.Name, user.Email);
 
             return Ok("Profile Updated");
         }
@@ -86,10 +87,21 @@ namespace AdoApi2.Controllers
         [HttpPut("update-user/{id}")]
         public async Task<IActionResult> UpdateUser(Guid id, User user)
         {
-            user.Id = id;
-            await service.UpdateUser(user);
+            if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Email))
+                return BadRequest("Name and Email are required");
+
+            if (user.RoleId <= 0)
+                return BadRequest("Role is required");
+
+            await service.UpdateUserByAdmin(
+                id,
+                user.Name,
+                user.Email,
+                user.RoleId);
+
             return Ok("User Updated");
         }
+
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("delete-user/{id}")]

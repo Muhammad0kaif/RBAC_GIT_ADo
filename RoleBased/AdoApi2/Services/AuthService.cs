@@ -22,18 +22,25 @@ namespace AdoApi2.Services
             if (user == null)
                 return null;
 
-            
+            if (string.IsNullOrEmpty(user.Password))
+                return null;
+
             var isValid = PasswordHelper.Verify(dto.Password, user.Password);
 
             if (!isValid)
                 return null;
+
             var role = await _authRepo.GetRoleById(user.RoleId);
+
+            if (role == null)
+                return null;
 
             var token = _jwtService.GenerateToken(
                 user.Id,
                 user.RoleId,
                 role.RoleName
             );
+
             var refreshToken = GenerateRefreshToken();
 
             await _authRepo.SaveRefreshToken(
@@ -41,7 +48,9 @@ namespace AdoApi2.Services
                 DateTime.UtcNow.AddDays(7),
                 user.Id
             );
+
             var permissions = await _authRepo.GetPermissionsByRoleId(user.RoleId);
+
             return new AuthResponseDto
             {
                 AccessToken = token,
@@ -49,7 +58,7 @@ namespace AdoApi2.Services
                 UserId = user.Id,
                 Role = role.RoleName,
                 MustChangePassword = user.MustChangePassword,
-                Permissions = permissions
+                Permissions = permissions ?? new List<PermissionDto>()
             };
         }
 

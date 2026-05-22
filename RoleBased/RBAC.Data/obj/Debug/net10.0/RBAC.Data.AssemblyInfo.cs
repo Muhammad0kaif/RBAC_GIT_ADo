@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RBAC.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00bd766e76577eb6c6dd827eef1519e16fa4c774")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f406d4bcb66106fdcf129ead7dbe92c1626041be")]
 [assembly: System.Reflection.AssemblyProductAttribute("RBAC.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RBAC.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

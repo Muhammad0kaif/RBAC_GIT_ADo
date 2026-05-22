@@ -35,5 +35,6 @@ namespace AdoApi2.Controllers
 
             return Ok(logs);
         }
+      
     }
 }

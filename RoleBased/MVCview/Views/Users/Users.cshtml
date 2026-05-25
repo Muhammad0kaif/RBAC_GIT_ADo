@@ -52,6 +52,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Actions</th>
+                    <th>Status</th>
                 </tr>
             </thead>
 
@@ -96,6 +97,29 @@
                                 </span>
                             }
 
+                        </td>
+                        <td>
+                            @if (user.IsLocked)
+                            {
+                                <span class="badge bg-danger">Locked</span>
+
+                                <form asp-controller="Users"
+                                      asp-action="Unlock"
+                                      asp-route-id="@user.Id"
+                                      method="post"
+                                      style="display:inline;">
+
+                                    <button type="submit"
+                                            class="btn btn-success btn-sm ms-2">
+                                        Unlock
+                                    </button>
+
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Active</span>
+                            }
                         </td>
 
                     </tr>

@@ -12,6 +12,12 @@ namespace PocoClasses.Dto
         public string Password { get; set; } = string.Empty;
         public string ConfirmPassword { get; set; } = string.Empty;
 
+        public int FailedLoginAttempts { get; set; }
+
+        public bool IsLocked { get; set; }
+
+        public DateTime? LockedAt { get; set; }
+
         public int RoleId { get; set; }
         public string? ProfilePicture { get; set; }
     }

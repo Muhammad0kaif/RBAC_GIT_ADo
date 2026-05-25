@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{2E2E1FD4-66EB-429A-926C-DCF87C52F46B}|AdoApi2\\AdoApi2.csproj|c:\\users\\md kaif ansari\\onedrive - g7 cr technologies india pvt ltd\\desktop\\rbac_git_ado\\rolebased\\adoapi2\\controllers\\auditlogscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E2E1FD4-66EB-429A-926C-DCF87C52F46B}|AdoApi2\\AdoApi2.csproj|solutionrelative:adoapi2\\controllers\\auditlogscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E2E1FD4-66EB-429A-926C-DCF87C52F46B}|AdoApi2\\AdoApi2.csproj|c:\\users\\md kaif ansari\\onedrive - g7 cr technologies india pvt ltd\\desktop\\rbac_git_ado\\rolebased\\adoapi2\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E2E1FD4-66EB-429A-926C-DCF87C52F46B}|AdoApi2\\AdoApi2.csproj|solutionrelative:adoapi2\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E2E1FD4-66EB-429A-926C-DCF87C52F46B}|AdoApi2\\AdoApi2.csproj|c:\\users\\md kaif ansari\\onedrive - g7 cr technologies india pvt ltd\\desktop\\rbac_git_ado\\rolebased\\adoapi2\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E2E1FD4-66EB-429A-926C-DCF87C52F46B}|AdoApi2\\AdoApi2.csproj|solutionrelative:adoapi2\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E2E1FD4-66EB-429A-926C-DCF87C52F46B}|AdoApi2\\AdoApi2.csproj|c:\\users\\md kaif ansari\\onedrive - g7 cr technologies india pvt ltd\\desktop\\rbac_git_ado\\rolebased\\adoapi2\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E2E1FD4-66EB-429A-926C-DCF87C52F46B}|AdoApi2\\AdoApi2.csproj|solutionrelative:adoapi2\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,61 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 220,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuditLogsController.cs",
-              "DocumentMoniker": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\Controllers\\AuditLogsController.cs",
-              "RelativeDocumentMoniker": "AdoApi2\\Controllers\\AuditLogsController.cs",
-              "ToolTip": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\Controllers\\AuditLogsController.cs",
-              "RelativeToolTip": "AdoApi2\\Controllers\\AuditLogsController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwCUAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-22T04:56:13.339Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "AdoApi2\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "AdoApi2\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAswFsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T09:58:45.159Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "AdoApi2\\Services\\UserService.cs",
-              "ToolTip": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\Services\\UserService.cs",
-              "RelativeToolTip": "AdoApi2\\Services\\UserService.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBwAAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T09:53:11.485Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "AdoApi2\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\MD KAIF ANSARI\\OneDrive - G7 CR Technologies India Pvt Ltd\\Desktop\\RBAC_GIT_ADo\\RoleBased\\AdoApi2\\Services\\AuthService.cs",
-              "RelativeToolTip": "AdoApi2\\Services\\AuthService.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAQwD4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T07:36:12.258Z"
             }
           ]
         }

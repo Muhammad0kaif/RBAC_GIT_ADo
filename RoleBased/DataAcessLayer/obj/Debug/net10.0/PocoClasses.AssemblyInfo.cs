@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PocoClasses")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f406d4bcb66106fdcf129ead7dbe92c1626041be")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a879e81f325724b313be91acb0223ef8e54c5889")]
 [assembly: System.Reflection.AssemblyProductAttribute("PocoClasses")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PocoClasses")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

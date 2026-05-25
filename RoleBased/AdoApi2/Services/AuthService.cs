@@ -22,13 +22,25 @@ namespace AdoApi2.Services
             if (user == null)
                 return null;
 
+            if (user.IsLocked)
+                throw new Exception("Account is locked. Please contact admin.");
+
             if (string.IsNullOrEmpty(user.Password))
                 return null;
 
             var isValid = PasswordHelper.Verify(dto.Password, user.Password);
 
             if (!isValid)
+            {
+                await _authRepo.IncreaseFailedLogin(user.Id);
+
+                if (user.FailedLoginAttempts + 1 >= 5)
+                    throw new Exception("Account locked after 5 failed login attempts.");
+
                 return null;
+            }
+
+            await _authRepo.ResetFailedLogin(user.Id);
 
             var role = await _authRepo.GetRoleById(user.RoleId);
 
@@ -173,6 +185,13 @@ namespace AdoApi2.Services
             return true;
         }
 
+        #endregion
+
+        #region Unlock  User
+        public async Task UnlockUser(Guid userId)
+        {
+            await _authRepo.UnlockUser(userId);
+        }
         #endregion
     }
 }

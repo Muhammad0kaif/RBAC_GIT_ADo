@@ -20,5 +20,10 @@ namespace AdoApi2.Repositories.Interfaces
         Task<User> GetUserById(Guid id);
         Task<List<PermissionDto>> GetPermissionsByRoleId(int roleId);
         Task<List<Role>> GetRoles();
+        Task IncreaseFailedLogin(Guid userId);
+
+        Task ResetFailedLogin(Guid userId);
+
+        Task UnlockUser(Guid userId);
     }
 }

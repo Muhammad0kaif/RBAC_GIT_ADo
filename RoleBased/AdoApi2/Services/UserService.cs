@@ -55,13 +55,37 @@ namespace AdoApi2.Services
             if (user == null)
                 return false;
 
-            var passwordHash = passwordService.HashPassword(dto.NewPassword);
+            if (!PasswordHelper.Verify(dto.OldPassword, user.Password))
+                throw new Exception("Old password is incorrect");
 
-            await _repo.UpdatePassword( userId, passwordHash, false);
+            if (dto.NewPassword != dto.ConfirmPassword)
+                throw new Exception("New password and confirm password do not match");
+
+            if (!PasswordPolicyHelper.IsValid(dto.NewPassword, out string error))
+                throw new Exception(error);
+
+            var lastHashes = await _repo.GetLastPasswordHistory(userId);
+
+            foreach (var oldHash in lastHashes)
+            {
+                if (PasswordHelper.Verify(dto.NewPassword, oldHash))
+                {
+                    throw new Exception("You cannot reuse your last 3 passwords");
+                }
+            }
+
+            await _repo.InsertPasswordHistory(userId, user.Password);
+
+            var passwordHash = PasswordHelper.Hash(dto.NewPassword);
+
+            await _repo.UpdatePassword(
+                userId,
+                passwordHash,
+                false);
 
             return true;
         }
 
-       
+
     }
 }

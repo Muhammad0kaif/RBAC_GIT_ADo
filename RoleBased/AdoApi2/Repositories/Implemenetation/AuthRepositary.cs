@@ -33,7 +33,12 @@ namespace AdoApi2.Repositories.Implemenetation
                     Email = reader["Email"].ToString()!,
                     Password = reader["PasswordHash"].ToString()!,
                     RoleId = Convert.ToInt32(reader["RoleId"]),
-                    MustChangePassword = Convert.ToBoolean(reader["MustChangePassword"])
+                    MustChangePassword = Convert.ToBoolean(reader["MustChangePassword"]),
+
+                    ProfilePicture = reader["ProfilePicture"] == DBNull.Value ? null : reader["ProfilePicture"].ToString(),
+                    FailedLoginAttempts = Convert.ToInt32(reader["FailedLoginAttempts"]),
+                    IsLocked = Convert.ToBoolean(reader["IsLocked"]),
+                    LockedAt = reader["LockedAt"] == DBNull.Value ? null : Convert.ToDateTime(reader["LockedAt"])
                 };
             }
 
@@ -231,6 +236,45 @@ namespace AdoApi2.Repositories.Implemenetation
             }
 
             return permissions;
+        }
+
+        #endregion
+
+        #region IncreaseFailedLogin
+        public async Task IncreaseFailedLogin(Guid userId)
+        {
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_IncreaseFailedLogin", conn);
+
+            cmd.Parameters.AddWithValue("@UserId", userId);
+
+            await ExecuteNonQuery(cmd);
+        }
+
+        #endregion
+
+        #region  ResetFailedLogin
+        public async Task ResetFailedLogin(Guid userId)
+        {
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_ResetFailedLogin", conn);
+
+            cmd.Parameters.AddWithValue("@UserId", userId);
+
+            await ExecuteNonQuery(cmd);
+        }
+
+        #endregion
+
+        #region UnlockUser
+        public async Task UnlockUser(Guid userId)
+        {
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_UnlockUser", conn);
+
+            cmd.Parameters.AddWithValue("@UserId", userId);
+
+            await ExecuteNonQuery(cmd);
         }
 
         #endregion

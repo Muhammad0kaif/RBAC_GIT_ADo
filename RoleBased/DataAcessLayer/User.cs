@@ -14,5 +14,10 @@ namespace PocoClasses
         public string? ProfilePicture { get; set; }
         public ICollection<Order>? Orders { get; set; }
         public bool MustChangePassword { get; set; }
+        public int FailedLoginAttempts { get; set; }
+
+        public bool IsLocked { get; set; }
+
+        public DateTime? LockedAt { get; set; }
     }
 } 

@@ -196,6 +196,29 @@
         }
       }
     },
+    "/api/Auth/unlock/{guid}": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Orders/create-order": {
       "post": {
         "tags": [
@@ -565,24 +588,19 @@
   "components": {
     "schemas": {
       "ChangePasswordDto": {
-        "required": [
-          "confirmPassword",
-          "newPassword",
-          "oldPassword"
-        ],
         "type": "object",
         "properties": {
           "oldPassword": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "newPassword": {
-            "minLength": 6,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "confirmPassword": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -710,6 +728,18 @@
           },
           "mustChangePassword": {
             "type": "boolean"
+          },
+          "failedLoginAttempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isLocked": {
+            "type": "boolean"
+          },
+          "lockedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -735,6 +765,18 @@
           },
           "confirmPassword": {
             "type": "string",
+            "nullable": true
+          },
+          "failedLoginAttempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isLocked": {
+            "type": "boolean"
+          },
+          "lockedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           },
           "roleId": {

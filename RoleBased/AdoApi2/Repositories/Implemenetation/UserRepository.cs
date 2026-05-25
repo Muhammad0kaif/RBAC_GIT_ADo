@@ -26,7 +26,10 @@ namespace AdoApi2.Repositories.Implemenetation
                     Name = reader["Name"].ToString(),
                     Email = reader["Email"].ToString(),
                     RoleId = Convert.ToInt32(reader["RoleId"]),
-                    ProfilePicture = reader["ProfilePicture"] == DBNull.Value ? null : reader["ProfilePicture"].ToString()
+                    ProfilePicture = reader["ProfilePicture"] == DBNull.Value ? null : reader["ProfilePicture"].ToString(),
+                    FailedLoginAttempts = Convert.ToInt32(reader["FailedLoginAttempts"]),
+                    IsLocked = Convert.ToBoolean(reader["IsLocked"]),
+                    LockedAt = reader["LockedAt"] == DBNull.Value ? null : Convert.ToDateTime(reader["LockedAt"]),
                 });
             }
 
@@ -142,6 +145,40 @@ namespace AdoApi2.Repositories.Implemenetation
             cmd.Parameters.AddWithValue("@RoleId", roleId);
 
             await ExecuteNonQuery(cmd);
+        }
+
+        public async Task InsertPasswordHistory(Guid userId, string passwordHash)
+        {
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_InsertPasswordHistory", conn);
+
+            cmd.Parameters.AddWithValue("@Id", Guid.NewGuid());
+            cmd.Parameters.AddWithValue("@UserId", userId);
+            cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
+            cmd.Parameters.AddWithValue("@CreatedAt", DateTime.UtcNow);
+
+            await ExecuteNonQuery(cmd);
+        }
+
+        public async Task<List<string>> GetLastPasswordHistory(Guid userId)
+        {
+            List<string> hashes = new();
+
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_GetLastPasswordHistory", conn);
+
+            cmd.Parameters.AddWithValue("@UserId", userId);
+
+            await conn.OpenAsync();
+
+            using var reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                hashes.Add(reader["PasswordHash"].ToString()!);
+            }
+
+            return hashes;
         }
     }
 }

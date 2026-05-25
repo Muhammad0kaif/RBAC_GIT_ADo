@@ -111,6 +111,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AdoApi2.Controllers.AuthController",
+    "Method": "UnlockUser",
+    "RelativePath": "api/Auth/unlock/{guid}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "guid",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AdoApi2.Controllers.OrdersController",
     "Method": "CreateOrder",
     "RelativePath": "api/Orders/create-order",

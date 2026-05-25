@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using AdoApi2.Services;
+﻿using AdoApi2.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PocoClasses.Dto;
 
 namespace AdoApi2.Controllers
@@ -71,5 +72,19 @@ namespace AdoApi2.Controllers
 
             return Ok("User created successfully");
         }
+
+
+        #region Unlock User 
+        [Authorize(Roles = "Admin")]
+        [HttpPost("unlock/{guid}")]
+        public async Task<IActionResult> UnlockUser(Guid guid)
+        {
+            await authService.UnlockUser(guid);
+
+            return Ok("User unlocked successfully");
+        }
+
+        #endregion
+
     }
 }

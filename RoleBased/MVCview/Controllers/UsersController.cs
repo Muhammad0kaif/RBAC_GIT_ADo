@@ -184,5 +184,32 @@ namespace MVCview.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Unlock(Guid id)
+        {
+            var token = HttpContext.Session.GetString("token");
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var apiResult = await apiClient.PostAsync<string>(
+                $"/api/auth/unlock/{id}",
+                new { });
+
+            if (apiResult.Success)
+            {
+                TempData["Success"] = "User unlocked successfully.";
+            }
+            else
+            {
+                TempData["Error"] = apiResult.Error;
+            }
+
+            return RedirectToAction("Users");
+        }
+
     }
 }

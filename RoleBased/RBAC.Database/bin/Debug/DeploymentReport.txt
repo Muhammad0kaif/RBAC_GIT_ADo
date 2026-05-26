@@ -1,0 +1,92 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       [dbo].[Permissions]
+       [dbo].[RefreshTokens]
+       [dbo].[Roles]
+       [dbo].[Users]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[Permissions].[CanRead] is being dropped, data loss could occur.
+       The column [dbo].[Permissions].[CanWrite] is being dropped, data loss could occur.
+       The column [dbo].[Permissions].[RoleId] is being dropped, data loss could occur.
+       The type for column Id in table [dbo].[RefreshTokens] is currently  INT IDENTITY (1, 1) NOT NULL but is being changed to
+          UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+
+** User actions
+     Drop
+       unnamed constraint on [dbo].[RefreshTokens] (Default Constraint)
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       unnamed constraint on [dbo].[Permissions] (Foreign Key)
+       unnamed constraint on [dbo].[RefreshTokens] (Foreign Key)
+       unnamed constraint on [dbo].[Users] (Unique Constraint)
+     Recreate table
+       [dbo].[Permissions] (Table)
+       [dbo].[RefreshTokens] (Table)
+       [dbo].[Roles] (Table)
+       [dbo].[Users] (Table)
+     Create
+       [dbo].[RolePermissions] (Table)
+       Default Constraint: unnamed constraint on [dbo].[RolePermissions] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[RolePermissions] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[RolePermissions] (Default Constraint)
+       [dbo].[FK_RefreshTokens_Users] (Foreign Key)
+       [dbo].[FK_Users_Roles] (Foreign Key)
+       [dbo].[FK_RolePermissions_Roles] (Foreign Key)
+       [dbo].[FK_RolePermissions_Permissions] (Foreign Key)
+       [dbo].[FK_Orders_Users] (Foreign Key)
+       [dbo].[sp_GetAuditLogs] (Procedure)
+       [dbo].[sp_GetRefreshToken] (Procedure)
+       [dbo].[sp_SaveRefreshToken] (Procedure)
+     Alter
+       [dbo].[sp_GetPermissionsByRoleId] (Procedure)
+       [dbo].[sp_DeleteUser] (Procedure)
+       [dbo].[sp_RevokeRefreshToken] (Procedure)
+       [dbo].[sp_GetRoleById] (Procedure)
+       [dbo].[sp_GetRoles] (Procedure)
+       [dbo].[sp_CreateUser] (Procedure)
+       [dbo].[sp_GetPasswordHistory] (Procedure)
+       [dbo].[sp_GetUserByEmail] (Procedure)
+       [dbo].[sp_GetUserById] (Procedure)
+       [dbo].[sp_GetUsers] (Procedure)
+       [dbo].[sp_IncreaseFailedLogin] (Procedure)
+       [dbo].[sp_ResetFailedLogin] (Procedure)
+       [dbo].[sp_UnlockUser] (Procedure)
+       [dbo].[sp_UpdatePassword] (Procedure)
+       [dbo].[sp_UpdateProfile] (Procedure)
+       [dbo].[sp_UpdateProfilePicture] (Procedure)
+       [dbo].[sp_UpdateUserByAdmin] (Procedure)
+       [dbo].[sp_CreateOrder] (Procedure)
+       [dbo].[sp_GetAuditLogsByUser] (Procedure)
+       [dbo].[sp_GetLastPasswordHistory] (Procedure)
+       [dbo].[sp_GetOrdersPaged] (Procedure)
+       [dbo].[sp_InsertAuditLog] (Procedure)
+       [dbo].[sp_InsertPasswordHistory] (Procedure)
+       [dbo].[sp_UpdateOrder] (Procedure)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_PasswordHistory_Users] (Foreign Key)
+     Create
+       [dbo].[FK_PasswordHistory_Users] (Foreign Key)
+
+The column [dbo].[Permissions].[CanRead] is being dropped, data loss could occur.
+The column [dbo].[Permissions].[CanWrite] is being dropped, data loss could occur.
+The column [dbo].[Permissions].[RoleId] is being dropped, data loss could occur.
+The column PageName on table [dbo].[Permissions] must be changed from NULL to NOT NULL. If the table contains data, the ALTER script may not work. To avoid this issue, you must add values to this column for all rows or mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column ExpiryDate on table [dbo].[RefreshTokens] must be changed from NULL to NOT NULL. If the table contains data, the ALTER script may not work. To avoid this issue, you must add values to this column for all rows or mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The type for column Id in table [dbo].[RefreshTokens] is currently  INT IDENTITY (1, 1) NOT NULL but is being changed to  UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+The column IsRevoked on table [dbo].[RefreshTokens] must be changed from NULL to NOT NULL. If the table contains data, the ALTER script may not work. To avoid this issue, you must add values to this column for all rows or mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column Token on table [dbo].[RefreshTokens] must be changed from NULL to NOT NULL. If the table contains data, the ALTER script may not work. To avoid this issue, you must add values to this column for all rows or mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column UserId on table [dbo].[RefreshTokens] must be changed from NULL to NOT NULL. If the table contains data, the ALTER script may not work. To avoid this issue, you must add values to this column for all rows or mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+If this deployment is executed, changes to [dbo].[Permissions] might introduce run-time errors in [dbo].[sp_CheckPermission].
+If this deployment is executed, changes to [dbo].[Permissions] might introduce run-time errors in [dbo].[sp_HasPermission].
+If this deployment is executed, changes to [dbo].[RefreshTokens] might introduce run-time errors in [dbo].[sp_InsertRefreshToken].
+If this deployment is executed, changes to [dbo].[Roles] might introduce run-time errors in [dbo].[sp_GetRoleByName].
+If this deployment is executed, changes to [dbo].[Users] might introduce run-time errors in [dbo].[sp_RegisterUser].
+If this deployment is executed, changes to [dbo].[Users] might introduce run-time errors in [dbo].[sp_UpdateUser].
+

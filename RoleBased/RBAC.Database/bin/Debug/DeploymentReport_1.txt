@@ -1,0 +1,62 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[AuditLogs] (Table)
+       [dbo].[Orders] (Table)
+       [dbo].[PasswordHistory] (Table)
+       [dbo].[Permissions] (Table)
+       [dbo].[RefreshTokens] (Table)
+       [dbo].[RolePermissions] (Table)
+       [dbo].[Roles] (Table)
+       [dbo].[Users] (Table)
+       Default Constraint: unnamed constraint on [dbo].[RefreshTokens] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[RolePermissions] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[RolePermissions] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[RolePermissions] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Users] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Users] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Users] (Default Constraint)
+       [dbo].[FK_Orders_Users] (Foreign Key)
+       [dbo].[FK_PasswordHistory_Users] (Foreign Key)
+       [dbo].[FK_RefreshTokens_Users] (Foreign Key)
+       [dbo].[FK_RolePermissions_Roles] (Foreign Key)
+       [dbo].[FK_RolePermissions_Permissions] (Foreign Key)
+       [dbo].[FK_Users_Roles] (Foreign Key)
+       [dbo].[sp_CreateOrder] (Procedure)
+       [dbo].[sp_CreateUser] (Procedure)
+       [dbo].[sp_DeleteUser] (Procedure)
+       [dbo].[sp_GetAuditLogs] (Procedure)
+       [dbo].[sp_GetAuditLogsByUser] (Procedure)
+       [dbo].[sp_GetLastPasswordHistory] (Procedure)
+       [dbo].[sp_GetOrdersPaged] (Procedure)
+       [dbo].[sp_GetPasswordHistory] (Procedure)
+       [dbo].[sp_GetPermissionsByRoleId] (Procedure)
+       [dbo].[sp_GetRefreshToken] (Procedure)
+       [dbo].[sp_GetRoleById] (Procedure)
+       [dbo].[sp_GetRoles] (Procedure)
+       [dbo].[sp_GetUserByEmail] (Procedure)
+       [dbo].[sp_GetUserById] (Procedure)
+       [dbo].[sp_GetUsers] (Procedure)
+       [dbo].[sp_IncreaseFailedLogin] (Procedure)
+       [dbo].[sp_InsertAuditLog] (Procedure)
+       [dbo].[sp_InsertPasswordHistory] (Procedure)
+       [dbo].[sp_ResetFailedLogin] (Procedure)
+       [dbo].[sp_RevokeRefreshToken] (Procedure)
+       [dbo].[sp_SaveRefreshToken] (Procedure)
+       [dbo].[sp_UnlockUser] (Procedure)
+       [dbo].[sp_UpdateOrder] (Procedure)
+       [dbo].[sp_UpdatePassword] (Procedure)
+       [dbo].[sp_UpdateProfile] (Procedure)
+       [dbo].[sp_UpdateProfilePicture] (Procedure)
+       [dbo].[sp_UpdateUserByAdmin] (Procedure)
+
+** Supporting actions

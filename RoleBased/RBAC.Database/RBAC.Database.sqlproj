@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>RBAC.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{c1dbb3dc-96fc-4dee-a096-4ef7e5e74745}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql170DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>RBAC.Database</RootNamespace>
+    <AssemblyName>RBAC.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Stored Procedures" />
+    <Folder Include="Scripts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Tables\Roles.sql" />
+    <Build Include="Tables\Orders.sql" />
+    <Build Include="Tables\PasswordHistory.sql" />
+    <Build Include="Tables\RefreshTokens.sql" />
+    <Build Include="Tables\AuditLogs.sql" />
+    <Build Include="Stored Procedures\sp_GetUsers.sql" />
+    <Build Include="Stored Procedures\sp_GetUserById.sql" />
+    <Build Include="Stored Procedures\sp_GetUserByEmail.sql" />
+    <Build Include="Stored Procedures\sp_CreateUser.sql" />
+    <Build Include="Stored Procedures\sp_UpdateProfile.sql" />
+    <Build Include="Stored Procedures\sp_UpdateUserByAdmin.sql" />
+    <Build Include="Stored Procedures\sp_UpdatePassword.sql" />
+    <Build Include="Stored Procedures\sp_UpdateProfilePicture.sql" />
+    <Build Include="Stored Procedures\sp_DeleteUser.sql" />
+    <Build Include="Stored Procedures\sp_IncreaseFailedLogin.sql" />
+    <Build Include="Stored Procedures\sp_ResetFailedLogin.sql" />
+    <Build Include="Stored Procedures\sp_UnlockUser.sql" />
+    <Build Include="Stored Procedures\sp_InsertPasswordHistory.sql" />
+    <Build Include="Stored Procedures\sp_GetLastPasswordHistory.sql" />
+    <Build Include="Stored Procedures\sp_GetPasswordHistory.sql" />
+    <Build Include="Stored Procedures\sp_GetRoles.sql" />
+    <Build Include="Stored Procedures\sp_GetRoleById.sql" />
+    <Build Include="Stored Procedures\sp_GetPermissionsByRoleId.sql" />
+    <Build Include="Stored Procedures\sp_SaveRefreshToken.sql" />
+    <Build Include="Stored Procedures\sp_GetRefreshToken.sql" />
+    <Build Include="Stored Procedures\sp_RevokeRefreshToken.sql" />
+    <Build Include="Stored Procedures\sp_CreateOrder.sql" />
+    <Build Include="Stored Procedures\sp_UpdateOrder.sql" />
+    <Build Include="Stored Procedures\sp_GetOrdersPaged.sql" />
+    <Build Include="Stored Procedures\sp_InsertAuditLog.sql" />
+    <Build Include="Stored Procedures\sp_GetAuditLogs.sql" />
+    <Build Include="Stored Procedures\sp_GetAuditLogsByUser.sql" />
+    <Build Include="Tables\Permissions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\PostDeployment.sql" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database\bin\Debug\RBAC.Database.dacpac
+C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database\bin\Debug\RBAC.Database.dll
+C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database\bin\Debug\RBAC.Database.pdb
+C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database\obj\Debug\RBAC.Database.sqlproj.AssemblyReference.cache
+C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database\obj\Debug\RBAC.Database.dll
+C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database\obj\Debug\RBAC.Database.pdb

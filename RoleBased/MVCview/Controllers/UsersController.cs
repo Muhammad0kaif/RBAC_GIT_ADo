@@ -211,5 +211,33 @@ namespace MVCview.Controllers
             return RedirectToAction("Users");
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> PasswordHistory(Guid id)
+        {
+            var token = HttpContext.Session.GetString("token");
+            var role = HttpContext.Session.GetString("role");
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            if (role != "Admin")
+            {
+                return RedirectToAction("AccessDenied", "Home");
+            }
+
+            var apiResult = await apiClient.GetAsync<List<PasswordHistoryDto>>(
+                $"/api/Users/{id}/password-history");
+
+            if (!apiResult.Success)
+            {
+                TempData["Error"] = apiResult.Error;
+                return RedirectToAction("Users");
+            }
+
+            return View(apiResult.Data ?? new List<PasswordHistoryDto>());
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using PocoClasses;
+using PocoClasses.Dto;
 
 namespace AdoApi2.Repositories.Interfaces
 {
@@ -15,5 +16,6 @@ namespace AdoApi2.Repositories.Interfaces
         Task UpdateUserByAdmin(Guid userId, string name, string email, int roleId);
         Task InsertPasswordHistory(Guid userId, string passwordHash);
         Task<List<string>> GetLastPasswordHistory(Guid userId);
+        Task<List<PasswordHistoryDto>> GetPasswordHistory(Guid userId);
     }
 }

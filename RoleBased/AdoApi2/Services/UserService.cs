@@ -30,6 +30,12 @@ namespace AdoApi2.Services
         {
             return _repo.UpdateUserByAdmin(userId, name, email, roleId);
         }
+
+        public Task<List<PasswordHistoryDto>> GetPasswordHistory(Guid userId)
+        {
+            return _repo.GetPasswordHistory(userId);
+        }
+
         public async Task CreateUserByAdmin(User user)
         {
             var tempPassword = passwordService.GenerateTemporaryPassword();
@@ -48,21 +54,24 @@ namespace AdoApi2.Services
             await emailService.SendEmailAsync( user.Email, "Your account has been created", body);
         }
 
-        public async Task<bool> ChangePassword(Guid userId, ChangePasswordDto dto)
+        public async Task<ServiceResult> ChangePassword(Guid userId, ChangePasswordDto dto)
         {
             var user = await _repo.GetUserById(userId);
 
             if (user == null)
-                return false;
+                return ServiceResult.Fail("User not found");
+
+            if (string.IsNullOrEmpty(user.Password))
+                return ServiceResult.Fail("Current password is missing. Please contact admin.");
 
             if (!PasswordHelper.Verify(dto.OldPassword, user.Password))
-                throw new Exception("Old password is incorrect");
+                return ServiceResult.Fail("Old password is incorrect");
 
             if (dto.NewPassword != dto.ConfirmPassword)
-                throw new Exception("New password and confirm password do not match");
+                return ServiceResult.Fail("New password and confirm password do not match");
 
             if (!PasswordPolicyHelper.IsValid(dto.NewPassword, out string error))
-                throw new Exception(error);
+                return ServiceResult.Fail(error);
 
             var lastHashes = await _repo.GetLastPasswordHistory(userId);
 
@@ -70,7 +79,7 @@ namespace AdoApi2.Services
             {
                 if (PasswordHelper.Verify(dto.NewPassword, oldHash))
                 {
-                    throw new Exception("You cannot reuse your last 3 passwords");
+                    return ServiceResult.Fail("You cannot reuse your last 3 passwords");
                 }
             }
 
@@ -83,7 +92,7 @@ namespace AdoApi2.Services
                 passwordHash,
                 false);
 
-            return true;
+            return ServiceResult.Ok("Password changed successfully");
         }
 
 

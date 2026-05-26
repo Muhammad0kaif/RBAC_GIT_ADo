@@ -7,13 +7,16 @@ namespace AdoApi2.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
+        private readonly IWebHostEnvironment _env;
 
         public ExceptionMiddleware(
             RequestDelegate next,
-            ILogger<ExceptionMiddleware> logger)
+            ILogger<ExceptionMiddleware> logger,
+            IWebHostEnvironment env)
         {
             _next = next;
             _logger = logger;
+            _env = env;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -33,7 +36,14 @@ namespace AdoApi2.Middleware
                 var response = new
                 {
                     statusCode = context.Response.StatusCode,
-                    message = "Something went wrong. Please try again later."
+
+                    message = _env.IsDevelopment()
+                        ? ex.Message
+                        : "Something went wrong. Please try again later.",
+
+                    details = _env.IsDevelopment()
+                        ? ex.StackTrace
+                        : null
                 };
 
                 await context.Response.WriteAsync(

@@ -2,6 +2,7 @@
 using AdoApi2.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
 using PocoClasses;
+using PocoClasses.Dto;
 using PocoClasses.PocoClasses;
 
 namespace AdoApi2.Repositories.Implemenetation
@@ -51,10 +52,24 @@ namespace AdoApi2.Repositories.Implemenetation
                 return new User
                 {
                     Id = Guid.Parse(reader["Id"].ToString()!),
-                    Name = reader["Name"].ToString(),
-                    Email = reader["Email"].ToString(),
+
+                    Name = reader["Name"].ToString()!,
+
+                    Email = reader["Email"].ToString()!,
+
+                    Password = reader["PasswordHash"] == DBNull.Value? string.Empty : reader["PasswordHash"].ToString()!,
+
                     RoleId = Convert.ToInt32(reader["RoleId"]),
-                    ProfilePicture = reader["ProfilePicture"] == DBNull.Value? null : reader["ProfilePicture"].ToString()
+
+                    MustChangePassword = Convert.ToBoolean(reader["MustChangePassword"]),
+
+                    ProfilePicture = reader["ProfilePicture"] == DBNull.Value ? null: reader["ProfilePicture"].ToString(),
+
+                    FailedLoginAttempts = Convert.ToInt32(reader["FailedLoginAttempts"]),
+
+                    IsLocked = Convert.ToBoolean(reader["IsLocked"]),
+
+                    LockedAt = reader["LockedAt"] == DBNull.Value? null : Convert.ToDateTime(reader["LockedAt"])
                 };
             }
 
@@ -179,6 +194,35 @@ namespace AdoApi2.Repositories.Implemenetation
             }
 
             return hashes;
+        }
+
+        public async Task<List<PasswordHistoryDto>> GetPasswordHistory(Guid userId)
+        {
+            List<PasswordHistoryDto> history = new();
+
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_GetPasswordHistory", conn);
+
+            cmd.Parameters.AddWithValue("@UserId", userId);
+
+            await conn.OpenAsync();
+
+            using var reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                history.Add(new PasswordHistoryDto
+                {
+                    Id = Guid.Parse(reader["Id"].ToString()!),
+                    UserId = Guid.Parse(reader["UserId"].ToString()!),
+                    UserName = reader["UserName"].ToString()!,
+                    Email = reader["Email"].ToString()!,
+                    PasswordHash = reader["PasswordHash"].ToString()!,
+                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
+                });
+            }
+
+            return history;
         }
     }
 }

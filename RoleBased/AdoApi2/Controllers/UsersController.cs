@@ -68,10 +68,10 @@ namespace AdoApi2.Controllers
 
             var result = await service.ChangePassword(userId, dto);
 
-            if (!result)
-                return BadRequest("Password change failed");
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-            return Ok("Password changed successfully");
+            return Ok(result.Message);
         }
 
         [Authorize(Roles = "Admin")]
@@ -170,6 +170,18 @@ namespace AdoApi2.Controllers
                 message = "Profile picture uploaded successfully",
                 profilePicture = dbPath
             });
+
+
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("{id}/password-history")]
+        public async Task<IActionResult> GetPasswordHistory(Guid id)
+        {
+            var history = await service.GetPasswordHistory(id);
+
+            return Ok(history);
+        }
+
     }
 }

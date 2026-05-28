@@ -38,7 +38,9 @@ namespace AdoApi2.Repositories.Implemenetation
                     ProfilePicture = reader["ProfilePicture"] == DBNull.Value ? null : reader["ProfilePicture"].ToString(),
                     FailedLoginAttempts = Convert.ToInt32(reader["FailedLoginAttempts"]),
                     IsLocked = Convert.ToBoolean(reader["IsLocked"]),
-                    LockedAt = reader["LockedAt"] == DBNull.Value ? null : Convert.ToDateTime(reader["LockedAt"])
+                    LockedAt = reader["LockedAt"] == DBNull.Value ? null : Convert.ToDateTime(reader["LockedAt"]),
+                    DepartmentId = reader["DepartmentId"] == DBNull.Value ? null : Guid.Parse(reader["DepartmentId"].ToString()!),
+
                 };
             }
 

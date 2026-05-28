@@ -2,6 +2,9 @@
 
 @{
     var roles = ViewBag.Roles as List<PocoClasses.Role>;
+
+    var departments = ViewBag.Departments as List<MVCview.Models.DepartmentDto>
+        ?? new List<MVCview.Models.DepartmentDto>();
 }
 
 <div class="card shadow p-4">
@@ -58,7 +61,20 @@
                 }
             </select>
         </div>
+        <div class="mb-3">
+            <label>Department</label>
 
+            <select asp-for="DepartmentId" class="form-control">
+                <option value="">-- Select Department --</option>
+
+                @foreach (var department in departments)
+                {
+                    <option value="@department.Id">
+                        @department.Name
+                    </option>
+                }
+            </select>
+        </div>
         <button type="submit" class="btn btn-success">
             Save User
         </button>

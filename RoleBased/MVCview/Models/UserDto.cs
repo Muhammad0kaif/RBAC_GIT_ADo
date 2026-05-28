@@ -13,10 +13,9 @@
         public string? ProfilePicture { get; set; }
         public int RoleId { get; set; }
         public int FailedLoginAttempts { get; set; }
-
         public bool IsLocked { get; set; }
-
         public DateTime? LockedAt { get; set; }
-
+        public Guid? DepartmentId { get; set; }
+        public string DepartmentName { get; set; } = string.Empty;
     }
 }

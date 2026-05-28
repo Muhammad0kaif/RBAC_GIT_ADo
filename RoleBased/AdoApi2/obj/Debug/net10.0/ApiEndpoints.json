@@ -127,6 +127,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AdoApi2.Controllers.DepartmentsController",
+    "Method": "GetDepartments",
+    "RelativePath": "api/Departments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AdoApi2.Controllers.DepartmentsController",
+    "Method": "GetUsersByDepartment",
+    "RelativePath": "api/Departments/{id}/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AdoApi2.Controllers.OrdersController",
     "Method": "CreateOrder",
     "RelativePath": "api/Orders/create-order",
@@ -243,6 +269,27 @@
         "Name": "file",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AdoApi2.Controllers.UsersController",
+    "Method": "TransferDepartment",
+    "RelativePath": "api/Users/{userId}/transfer-department/{departmentId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "departmentId",
+        "Type": "System.Guid",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

@@ -1,0 +1,87 @@
+﻿@model List<MVCview.Models.UserDto>
+
+@{
+    ViewData["Title"] = "Department Users";
+}
+
+<div class="card shadow border-0 rounded-4">
+
+    <div class="card-body p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary mb-0">
+                Department Users
+            </h2>
+
+            <a asp-controller="Departments"
+               asp-action="Departments"
+               class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["Error"]
+            </div>
+        }
+
+        <table class="table table-bordered table-hover align-middle">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role Id</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+
+                            <td>@user.Name</td>
+
+                            <td>@user.Email</td>
+
+                            <td>@user.RoleId</td>
+
+                            <td>
+                                @if (user.IsLocked)
+                                {
+                                    <span class="badge bg-danger px-3 py-2">
+                                        Locked
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success px-3 py-2">
+                                        Active
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">
+                            No users found in this department
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

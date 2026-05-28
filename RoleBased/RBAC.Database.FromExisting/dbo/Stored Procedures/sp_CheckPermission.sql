@@ -1,4 +1,4 @@
-﻿CREATE   PROCEDURE sp_CheckPermission
+﻿CREATE PROCEDURE sp_CheckPermission
 @RoleId INT,
 @PageName NVARCHAR(100)
 AS

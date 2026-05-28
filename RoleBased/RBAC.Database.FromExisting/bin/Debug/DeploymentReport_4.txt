@@ -1,0 +1,46 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       [dbo].[Users]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       unnamed constraint on [dbo].[RefreshTokens] (Foreign Key)
+     Recreate table
+       [dbo].[Users] (Table)
+     Create
+       [dbo].[Departments] (Table)
+       [dbo].[FK_Users_Roles] (Foreign Key)
+       [dbo].[FK_Users_Departments] (Foreign Key)
+     Alter
+       [dbo].[sp_CreateUser] (Procedure)
+       [dbo].[sp_GetUserByEmail] (Procedure)
+       [dbo].[sp_GetUserById] (Procedure)
+       [dbo].[sp_GetUsers] (Procedure)
+       [dbo].[sp_UpdateUserByAdmin] (Procedure)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_PasswordHistory_Users] (Foreign Key)
+     Create
+       [dbo].[FK_PasswordHistory_Users] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[RefreshTokens] (Foreign Key)
+     Refresh
+       [dbo].[sp_DeleteUser] (Procedure)
+       [dbo].[sp_GetPasswordHistory] (Procedure)
+       [dbo].[sp_IncreaseFailedLogin] (Procedure)
+       [dbo].[sp_RegisterUser] (Procedure)
+       [dbo].[sp_ResetFailedLogin] (Procedure)
+       [dbo].[sp_UnlockUser] (Procedure)
+       [dbo].[sp_UpdatePassword] (Procedure)
+       [dbo].[sp_UpdateProfile] (Procedure)
+       [dbo].[sp_UpdateProfilePicture] (Procedure)
+       [dbo].[sp_UpdateUser] (Procedure)

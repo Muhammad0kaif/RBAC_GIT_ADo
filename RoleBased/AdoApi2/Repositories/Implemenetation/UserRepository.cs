@@ -31,6 +31,8 @@ namespace AdoApi2.Repositories.Implemenetation
                     FailedLoginAttempts = Convert.ToInt32(reader["FailedLoginAttempts"]),
                     IsLocked = Convert.ToBoolean(reader["IsLocked"]),
                     LockedAt = reader["LockedAt"] == DBNull.Value ? null : Convert.ToDateTime(reader["LockedAt"]),
+                    DepartmentId = reader["DepartmentId"] == DBNull.Value? null: Guid.Parse(reader["DepartmentId"].ToString()!),
+                    DepartmentName = reader["DepartmentName"] == DBNull.Value? string.Empty: reader["DepartmentName"].ToString()!,
                 });
             }
 
@@ -69,7 +71,9 @@ namespace AdoApi2.Repositories.Implemenetation
 
                     IsLocked = Convert.ToBoolean(reader["IsLocked"]),
 
-                    LockedAt = reader["LockedAt"] == DBNull.Value? null : Convert.ToDateTime(reader["LockedAt"])
+                    LockedAt = reader["LockedAt"] == DBNull.Value? null : Convert.ToDateTime(reader["LockedAt"]),
+                    DepartmentId = reader["DepartmentId"] == DBNull.Value ? null : Guid.Parse(reader["DepartmentId"].ToString()!),
+
                 };
             }
 
@@ -86,6 +90,7 @@ namespace AdoApi2.Repositories.Implemenetation
             cmd.Parameters.AddWithValue("@Email", user.Email);
             cmd.Parameters.AddWithValue("@PasswordHash", user.Password);
             cmd.Parameters.AddWithValue("@RoleId", user.RoleId);
+            cmd.Parameters.AddWithValue("@DepartmentId",user.DepartmentId == null ? DBNull.Value : user.DepartmentId);
             cmd.Parameters.AddWithValue("@MustChangePassword", user.MustChangePassword);
             await ExecuteNonQuery(cmd);
         }
@@ -149,7 +154,7 @@ namespace AdoApi2.Repositories.Implemenetation
             await ExecuteNonQuery(cmd);
         }
 
-        public async Task UpdateUserByAdmin( Guid userId,string name, string email, int roleId)
+        public async Task UpdateUserByAdmin( Guid userId,string name, string email, int roleId,Guid? departmentId)
         {
             using var conn = CreateConnection();
             using var cmd = CreateCommand("sp_UpdateUserByAdmin", conn);
@@ -158,7 +163,7 @@ namespace AdoApi2.Repositories.Implemenetation
             cmd.Parameters.AddWithValue("@Name", name);
             cmd.Parameters.AddWithValue("@Email", email);
             cmd.Parameters.AddWithValue("@RoleId", roleId);
-
+            cmd.Parameters.AddWithValue( "@DepartmentId",departmentId == null ? DBNull.Value : departmentId);
             await ExecuteNonQuery(cmd);
         }
 
@@ -223,6 +228,16 @@ namespace AdoApi2.Repositories.Implemenetation
             }
 
             return history;
+        }
+        public async Task TransferUserDepartment(Guid userId, Guid departmentId)
+        {
+            using var conn = CreateConnection();
+            using var cmd = CreateCommand("sp_TransferUserDepartment", conn);
+
+            cmd.Parameters.AddWithValue("@UserId", userId);
+            cmd.Parameters.AddWithValue("@DepartmentId", departmentId);
+
+            await ExecuteNonQuery(cmd);
         }
     }
 }

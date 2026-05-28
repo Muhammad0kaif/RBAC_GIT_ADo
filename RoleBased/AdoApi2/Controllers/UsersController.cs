@@ -93,11 +93,7 @@ namespace AdoApi2.Controllers
             if (user.RoleId <= 0)
                 return BadRequest("Role is required");
 
-            await service.UpdateUserByAdmin(
-                id,
-                user.Name,
-                user.Email,
-                user.RoleId);
+            await service.UpdateUserByAdmin( id, user.Name, user.Email, user.RoleId, user.DepartmentId);
 
             return Ok("User Updated");
         }
@@ -181,6 +177,16 @@ namespace AdoApi2.Controllers
             var history = await service.GetPasswordHistory(id);
 
             return Ok(history);
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{userId}/transfer-department/{departmentId}")]
+        public async Task<IActionResult> TransferDepartment( Guid userId, Guid departmentId)
+        {
+            await service.TransferUserDepartment(userId, departmentId);
+
+            return Ok("User transferred successfully");
         }
 
     }

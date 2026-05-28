@@ -1,5 +1,9 @@
 ﻿@model MVCview.Models.UserDto
 
+@{
+    var departments = ViewBag.Departments as List<MVCview.Models.DepartmentDto>
+        ?? new List<MVCview.Models.DepartmentDto>();
+}
 <div class="card shadow p-4">
 
     <h2 class="text-primary mb-4">
@@ -45,8 +49,29 @@
             <select asp-for="RoleId" class="form-select">
 
                 <option value="1">Admin</option>
-
                 <option value="2">User</option>
+                <option value="3">Manager</option>
+
+            </select>
+
+        </div>
+        <div class="mb-3">
+
+            <label class="form-label">
+                Department
+            </label>
+
+            <select asp-for="DepartmentId" class="form-select">
+
+                <option value="">-- Select Department --</option>
+
+                @foreach (var department in departments)
+                {
+                    <option value="@department.Id"
+                            selected="@(Model.DepartmentId == department.Id)">
+                        @department.Name
+                    </option>
+                }
 
             </select>
 

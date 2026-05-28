@@ -15,6 +15,7 @@ namespace PocoClasses.Dto
         public Guid UserId { get; set; }
         public bool MustChangePassword { get; set; }
         public List<PermissionDto> Permissions { get; set; }
-        
+        public Guid? DepartmentId { get; set; }
+
     }
 }

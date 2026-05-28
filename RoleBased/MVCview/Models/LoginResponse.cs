@@ -9,5 +9,6 @@
         public string UserId { get; set; } = string.Empty;
         public bool MustChangePassword { get; set; }
         public List<PermissionDto> permissions { get; set; }
+        public Guid? DepartmentId { get; set; }
     }
 }

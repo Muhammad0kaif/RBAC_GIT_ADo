@@ -10,6 +10,13 @@
     var userPermission = permissions?.FirstOrDefault(p => p.PageName.ToLower() == "users");
 }
 
+@{
+    var departments = ViewBag.Departments as List<MVCview.Models.DepartmentDto>
+        ?? new List<MVCview.Models.DepartmentDto>();
+
+    var role = Context.Session.GetString("role");
+}
+
 <div class="card shadow border-0 rounded-4">
 
     <div class="card-body p-4">
@@ -51,6 +58,7 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Department</th>
                     <th>Actions</th>
                     <th>Status</th>
                 </tr>
@@ -67,7 +75,56 @@
                         <td>@user.Name</td>
 
                         <td>@user.Email</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(user.DepartmentName))
+                            {
+                                <span class="badge bg-info text-dark">
+                                    @user.DepartmentName
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+                                    No Department
+                                </span>
+                            }
 
+                            @if (role == "Admin")
+                            {
+                                <form asp-controller="Users"
+                                      asp-action="TransferDepartment"
+                                      method="post"
+                                      class="mt-2 d-flex gap-2">
+
+                                    <input type="hidden"
+                                           name="userId"
+                                           value="@user.Id" />
+
+                                    <select name="departmentId"
+                                            class="form-select form-select-sm"
+                                            required>
+
+                                        <option value="">Transfer to...</option>
+
+                                        @foreach (var dept in departments)
+                                        {
+                                            <option value="@dept.Id"
+                                                    selected="@(user.DepartmentId == dept.Id)">
+                                                @dept.Name
+                                            </option>
+                                        }
+
+                                    </select>
+
+                                    <button type="submit"
+                                            class="btn btn-outline-primary btn-sm"
+                                            onclick="return confirm('Transfer this user to selected department?');">
+                                        Transfer
+                                    </button>
+
+                                </form>
+                            }
+                        </td>
                         <td>
                             @if (userPermission?.CanWrite == true)
                             {

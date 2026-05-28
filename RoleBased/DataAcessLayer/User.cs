@@ -19,5 +19,8 @@ namespace PocoClasses
         public bool IsLocked { get; set; }
 
         public DateTime? LockedAt { get; set; }
+        public Guid? DepartmentId { get; set; }
+        public string DepartmentName { get; set; } = string.Empty;
+        public Department? Department { get; set; }
     }
 } 

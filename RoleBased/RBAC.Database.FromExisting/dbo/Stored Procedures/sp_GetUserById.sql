@@ -1,18 +1,22 @@
-﻿CREATE   PROCEDURE sp_GetUserById
+﻿CREATE PROCEDURE [dbo].[sp_GetUserById]
     @Id UNIQUEIDENTIFIER
 AS
 BEGIN
     SELECT
-        Id,
-        Name,
-        Email,
-        PasswordHash,
-        RoleId,
-        MustChangePassword,
-        ProfilePicture,
-        FailedLoginAttempts,
-        IsLocked,
-        LockedAt
-    FROM Users
-    WHERE Id = @Id
+        u.Id,
+        u.Name,
+        u.Email,
+        u.PasswordHash,
+        u.RoleId,
+        u.DepartmentId,
+        d.Name AS DepartmentName,
+        u.MustChangePassword,
+        u.ProfilePicture,
+        u.FailedLoginAttempts,
+        u.IsLocked,
+        u.LockedAt
+    FROM Users u
+    LEFT JOIN Departments d
+        ON u.DepartmentId = d.Id
+    WHERE u.Id = @Id
 END

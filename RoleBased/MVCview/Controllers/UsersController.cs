@@ -34,7 +34,11 @@ namespace MVCview.Controllers
             ViewBag.Permissions = permissions;
 
             var apiResult = await apiClient.GetAsync<List<UserDto>>("/api/Users/get-users");
+            var departmentResult = await apiClient.GetAsync<List<DepartmentDto>>("/api/departments");
 
+            ViewBag.Departments = departmentResult.Success
+                ? departmentResult.Data
+                : new List<DepartmentDto>();
             if (!apiResult.Success)
             {
                 ViewBag.Error = apiResult.Error;
@@ -94,7 +98,9 @@ namespace MVCview.Controllers
                     roles = await response.Content.ReadFromJsonAsync<List<Role>>();
                 }
             }
+            var departmentResult = await apiClient.GetAsync<List<DepartmentDto>>("/api/departments");
 
+            ViewBag.Departments = departmentResult.Success ? departmentResult.Data: new List<DepartmentDto>();
             ViewBag.Roles = roles ?? new List<Role>();
 
             return View();
@@ -148,6 +154,11 @@ namespace MVCview.Controllers
                 }
             }
 
+            var departmentResult = await apiClient.GetAsync<List<DepartmentDto>>("/api/departments");
+
+            ViewBag.Departments = departmentResult.Success
+                ? departmentResult.Data
+                : new List<DepartmentDto>();
             if (user == null)
             {
                 ViewBag.Error = "User not found";
@@ -238,6 +249,38 @@ namespace MVCview.Controllers
             }
 
             return View(apiResult.Data ?? new List<PasswordHistoryDto>());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TransferDepartment(Guid userId, Guid departmentId)
+        {
+            var token = HttpContext.Session.GetString("token");
+            var role = HttpContext.Session.GetString("role");
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            if (role != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var apiResult = await apiClient.PutAsync<string>(
+                $"/api/Users/{userId}/transfer-department/{departmentId}",
+                new { });
+
+            if (apiResult.Success)
+            {
+                TempData["Success"] = "User transferred successfully.";
+            }
+            else
+            {
+                TempData["Error"] = apiResult.Error;
+            }
+
+            return RedirectToAction("Users");
         }
     }
 }

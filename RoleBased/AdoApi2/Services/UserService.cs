@@ -26,9 +26,9 @@ namespace AdoApi2.Services
             return _repo.UpdateProfile(userId, name, email);
         }
 
-        public Task UpdateUserByAdmin(Guid userId, string name, string email,int roleId)
+        public Task UpdateUserByAdmin(Guid userId, string name, string email,int roleId,Guid? departmentId)
         {
-            return _repo.UpdateUserByAdmin(userId, name, email, roleId);
+            return _repo.UpdateUserByAdmin(userId, name, email, roleId, departmentId);
         }
 
         public Task<List<PasswordHistoryDto>> GetPasswordHistory(Guid userId)
@@ -94,7 +94,10 @@ namespace AdoApi2.Services
 
             return ServiceResult.Ok("Password changed successfully");
         }
-
+        public Task TransferUserDepartment(Guid userId, Guid departmentId)
+        {
+            return _repo.TransferUserDepartment(userId, departmentId);
+        }
 
     }
 }

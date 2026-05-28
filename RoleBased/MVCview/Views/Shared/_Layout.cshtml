@@ -108,6 +108,12 @@
                     {
                         <a asp-controller="Profile" asp-action="Profile">Profile</a>
                     }
+                    else if (item.PageName == "Departments")
+                    {
+                        <a asp-controller="Departments" asp-action="Departments">
+                            Departments
+                        </a>
+                    }
                     else
                     {
                         <a asp-controller="@item.PageName" asp-action="@item.PageName">

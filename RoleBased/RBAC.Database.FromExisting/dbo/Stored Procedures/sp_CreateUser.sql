@@ -1,9 +1,10 @@
-﻿CREATE PROCEDURE sp_CreateUser
+﻿CREATE PROCEDURE [dbo].[sp_CreateUser]
     @Id UNIQUEIDENTIFIER,
     @Name NVARCHAR(100),
-    @Email NVARCHAR(100),
+    @Email NVARCHAR(150),
     @PasswordHash NVARCHAR(500),
     @RoleId INT,
+    @DepartmentId UNIQUEIDENTIFIER = NULL,
     @MustChangePassword BIT
 AS
 BEGIN
@@ -14,7 +15,11 @@ BEGIN
         Email,
         PasswordHash,
         RoleId,
-        MustChangePassword
+        DepartmentId,
+        MustChangePassword,
+        FailedLoginAttempts,
+        IsLocked,
+        LockedAt
     )
     VALUES
     (
@@ -23,6 +28,10 @@ BEGIN
         @Email,
         @PasswordHash,
         @RoleId,
-        @MustChangePassword
+        @DepartmentId,
+        @MustChangePassword,
+        0,
+        0,
+        NULL
     )
 END

@@ -1,18 +1,22 @@
-﻿CREATE PROCEDURE sp_GetUserByEmail
-    @Email NVARCHAR(100)
+﻿CREATE PROCEDURE [dbo].[sp_GetUserByEmail]
+    @Email NVARCHAR(150)
 AS
 BEGIN
     SELECT
-        Id,
-        Name,
-        Email,
-        PasswordHash,
-        RoleId,
-        MustChangePassword,
-        ProfilePicture,
-        FailedLoginAttempts,
-        IsLocked,
-        LockedAt
-    FROM Users
-    WHERE Email = @Email
+        u.Id,
+        u.Name,
+        u.Email,
+        u.PasswordHash,
+        u.RoleId,
+        u.DepartmentId,
+        d.Name AS DepartmentName,
+        u.MustChangePassword,
+        u.ProfilePicture,
+        u.FailedLoginAttempts,
+        u.IsLocked,
+        u.LockedAt
+    FROM Users u
+    LEFT JOIN Departments d
+        ON u.DepartmentId = d.Id
+    WHERE u.Email = @Email
 END

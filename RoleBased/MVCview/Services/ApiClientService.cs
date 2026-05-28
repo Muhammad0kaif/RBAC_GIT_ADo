@@ -29,10 +29,7 @@ namespace MVCview.Services
             return await SendAsync<T>(HttpMethod.Delete, url, null);
         }
 
-        public async Task<(bool Success, string Error)> UploadFileAsync(
-    string url,
-    IFormFile file,
-    string formFileName = "file")
+        public async Task<(bool Success, string Error)> UploadFileAsync( string url,IFormFile file, string formFileName = "file")
         {
             try
             {
@@ -100,10 +97,7 @@ namespace MVCview.Services
             }
         }
 
-        private async Task<(bool Success, T? Data, string Error)> SendAsync<T>(
-            HttpMethod method,
-            string url,
-            object? data)
+        private async Task<(bool Success, T? Data, string Error)> SendAsync<T>(HttpMethod method,string url,object? data)
         {
             try
             {
@@ -197,5 +191,7 @@ namespace MVCview.Services
 
             return client;
         }
+
+       
     }
 }

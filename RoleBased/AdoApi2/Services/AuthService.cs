@@ -50,7 +50,8 @@ namespace AdoApi2.Services
             var token = _jwtService.GenerateToken(
                 user.Id,
                 user.RoleId,
-                role.RoleName
+                role.RoleName,
+                user.DepartmentId
             );
 
             var refreshToken = GenerateRefreshToken();
@@ -69,8 +70,10 @@ namespace AdoApi2.Services
                 RefreshToken = refreshToken,
                 UserId = user.Id,
                 Role = role.RoleName,
+               
                 MustChangePassword = user.MustChangePassword,
-                Permissions = permissions ?? new List<PermissionDto>()
+                Permissions = permissions ?? new List<PermissionDto>(),
+                DepartmentId = user.DepartmentId,
             };
         }
 
@@ -124,7 +127,8 @@ namespace AdoApi2.Services
             var newAccessToken = _jwtService.GenerateToken(
                 user.Id,
                 user.RoleId,
-                role.RoleName
+                role.RoleName,
+                user.DepartmentId
             );
 
             var newRefreshToken = GenerateRefreshToken();

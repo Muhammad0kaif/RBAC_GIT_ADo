@@ -7,13 +7,14 @@ namespace AdoApi2.Services
 {
     public class JwtService(IConfiguration config)
     {
-        public string GenerateToken(Guid userId, int roleId, string roleName)
+        public string GenerateToken(Guid userId, int roleId, string roleName,Guid? departmentId)
         {
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Role, roleName),
-                new Claim("RoleId", roleId.ToString())
+                new Claim("RoleId", roleId.ToString()),
+                new Claim("DepartmentId", departmentId?.ToString() ?? "")
             };
 
             var key = new SymmetricSecurityKey(

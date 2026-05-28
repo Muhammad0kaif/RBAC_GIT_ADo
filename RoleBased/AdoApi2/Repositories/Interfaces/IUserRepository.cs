@@ -13,9 +13,10 @@ namespace AdoApi2.Repositories.Interfaces
         Task UpdateProfilePicture(Guid userId, string filePath);
         Task UpdateProfile(Guid userId, string name, string email);
         Task UpdatePassword(Guid userId, string passwordHash, bool mustChangePassword);
-        Task UpdateUserByAdmin(Guid userId, string name, string email, int roleId);
+        Task UpdateUserByAdmin(Guid userId, string name, string email, int roleId,Guid? departmentId);
         Task InsertPasswordHistory(Guid userId, string passwordHash);
         Task<List<string>> GetLastPasswordHistory(Guid userId);
         Task<List<PasswordHistoryDto>> GetPasswordHistory(Guid userId);
+        Task TransferUserDepartment(Guid userId, Guid departmentId);
     }
 }

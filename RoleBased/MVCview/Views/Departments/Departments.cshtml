@@ -1,0 +1,67 @@
+﻿@model List<MVCview.Models.DepartmentDto>
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<div class="card shadow border-0 rounded-4">
+
+    <div class="card-body p-4">
+
+        <h2 class="text-primary mb-4">
+            Departments
+        </h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        <table class="table table-bordered table-hover align-middle">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Department Id</th>
+                    <th>Name</th>
+                    <th>Users</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var department in Model)
+                    {
+                        <tr>
+                            <td>@department.Id</td>
+
+                            <td>@department.Name</td>
+
+                            <td>
+                                <a asp-controller="Departments"
+                                   asp-action="Users"
+                                   asp-route-id="@department.Id"
+                                   class="btn btn-primary btn-sm">
+                                    View Users
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">
+                            No departments found
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

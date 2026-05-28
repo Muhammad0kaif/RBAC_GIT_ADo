@@ -43,14 +43,15 @@ namespace MVCview.Controllers
                 HttpContext.Session.SetString("refreshToken", result.RefreshToken);
                 HttpContext.Session.SetString("role", result.role.ToString());
                 HttpContext.Session.SetString("UserId", result.UserId.ToString());
-                HttpContext.Session.SetString(
-                    "permissions",
-                    JsonSerializer.Serialize(result.permissions));
+                HttpContext.Session.SetString( "permissions",JsonSerializer.Serialize(result.permissions));
 
-                HttpContext.Session.SetString(
-                    "mustChangePassword",
-                    result.MustChangePassword.ToString());
-
+                HttpContext.Session.SetString( "mustChangePassword", result.MustChangePassword.ToString());
+                if (result.DepartmentId != null)
+                {
+                    HttpContext.Session.SetString(
+                        "DepartmentId",
+                        result.DepartmentId.ToString()!);
+                }
                 if (result.MustChangePassword)
                 {
                     return RedirectToAction("ChangePassword", "Profile");

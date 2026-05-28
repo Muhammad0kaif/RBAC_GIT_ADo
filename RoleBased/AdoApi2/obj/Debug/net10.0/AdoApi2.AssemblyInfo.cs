@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdoApi2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b5d6be6bf58c27d86c23c017e0d09288c8bb0843")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+da5778def5166628b96e772348ff88c92204eeb9")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdoApi2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdoApi2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

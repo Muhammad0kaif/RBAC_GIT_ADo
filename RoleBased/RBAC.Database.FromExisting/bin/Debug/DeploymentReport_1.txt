@@ -1,0 +1,92 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       [dbo].[Users]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[users].[Password] is being dropped, data loss could occur.
+       The column [dbo].[users].[UserId] is being dropped, data loss could occur.
+       The column [dbo].[users].[UserName] is being dropped, data loss could occur.
+       The column [dbo].[Users].[Id] on table [dbo].[Users] must be added, but the column has no default value and does not
+         allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add
+         a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a
+         deployment option.
+       The column [dbo].[Users].[Name] on table [dbo].[Users] must be added, but the column has no default value and does not
+         allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add
+         a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a
+         deployment option.
+       The column [dbo].[Users].[PasswordHash] on table [dbo].[Users] must be added, but the column has no default value and
+         does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must
+         either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults
+         as a deployment option.
+       The column [dbo].[Users].[RoleId] on table [dbo].[Users] must be added, but the column has no default value and does not
+         allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add
+         a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a
+         deployment option.
+
+** User actions
+     Drop
+       [dbo].[users].[IX_users_Email] (Index)
+       [dbo].[users].[IX_users_UserName] (Index)
+       [dbo].[FK_blogPost_users_UserId] (Foreign Key)
+       [dbo].[FK_RoleUsers_users_UserId] (Foreign Key)
+       [dbo].[FK_comments_users_UserId] (Foreign Key)
+       [dbo].[FK_Reaction_users_UserId] (Foreign Key)
+     Recreate table
+       [dbo].[Users] (Table)
+     Create
+       [dbo].[AuditLogs] (Table)
+       [dbo].[Orders] (Table)
+       [dbo].[PasswordHistory] (Table)
+       [dbo].[Permissions] (Table)
+       [dbo].[RefreshTokens] (Table)
+       [dbo].[Roles] (Table)
+       Default Constraint: unnamed constraint on [dbo].[RefreshTokens] (Default Constraint)
+       [dbo].[FK_PasswordHistory_Users] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[Permissions] (Foreign Key)
+       Foreign Key: unnamed constraint on [dbo].[RefreshTokens] (Foreign Key)
+       [dbo].[sp_CheckPermission] (Procedure)
+       [dbo].[sp_CreateOrder] (Procedure)
+       [dbo].[sp_CreateUser] (Procedure)
+       [dbo].[sp_DeleteUser] (Procedure)
+       [dbo].[sp_GetAuditLogsByUser] (Procedure)
+       [dbo].[sp_GetAuditLogsPaged] (Procedure)
+       [dbo].[sp_GetDashboardReport] (Procedure)
+       [dbo].[sp_GetLastPasswordHistory] (Procedure)
+       [dbo].[sp_GetOrdersPaged] (Procedure)
+       [dbo].[sp_GetPasswordHistory] (Procedure)
+       [dbo].[sp_GetPermissionsByRoleId] (Procedure)
+       [dbo].[sp_GetRoleById] (Procedure)
+       [dbo].[sp_GetRoleByName] (Procedure)
+       [dbo].[sp_GetRoles] (Procedure)
+       [dbo].[sp_GetUserByEmail] (Procedure)
+       [dbo].[sp_GetUserById] (Procedure)
+       [dbo].[sp_GetUsers] (Procedure)
+       [dbo].[sp_HasPermission] (Procedure)
+       [dbo].[sp_IncreaseFailedLogin] (Procedure)
+       [dbo].[sp_InsertAuditLog] (Procedure)
+       [dbo].[sp_InsertPasswordHistory] (Procedure)
+       [dbo].[sp_InsertRefreshToken] (Procedure)
+       [dbo].[sp_RegisterUser] (Procedure)
+       [dbo].[sp_ResetFailedLogin] (Procedure)
+       [dbo].[sp_RevokeRefreshToken] (Procedure)
+       [dbo].[sp_UnlockUser] (Procedure)
+       [dbo].[sp_UpdateOrder] (Procedure)
+       [dbo].[sp_UpdatePassword] (Procedure)
+       [dbo].[sp_UpdateProfile] (Procedure)
+       [dbo].[sp_UpdateProfilePicture] (Procedure)
+       [dbo].[sp_UpdateUser] (Procedure)
+       [dbo].[sp_UpdateUserByAdmin] (Procedure)
+
+** Supporting actions
+
+The column [dbo].[users].[Password] is being dropped, data loss could occur.
+The column [dbo].[users].[UserId] is being dropped, data loss could occur.
+The column [dbo].[users].[UserName] is being dropped, data loss could occur.
+The column [dbo].[Users].[Id] on table [dbo].[Users] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column [dbo].[Users].[Name] on table [dbo].[Users] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column [dbo].[Users].[PasswordHash] on table [dbo].[Users] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column [dbo].[Users].[RoleId] on table [dbo].[Users] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+

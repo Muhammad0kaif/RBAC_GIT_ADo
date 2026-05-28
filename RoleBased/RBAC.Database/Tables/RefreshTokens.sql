@@ -1,15 +1,15 @@
 ﻿CREATE TABLE [dbo].[RefreshTokens]
 (
-     [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 
-    [Token] NVARCHAR(500) NOT NULL,
+    [Token] NVARCHAR(500) NULL,
 
-    [UserId] UNIQUEIDENTIFIER NOT NULL,
+    [UserId] UNIQUEIDENTIFIER NULL,
 
-    [ExpiryDate] DATETIME2 NOT NULL,
+    [ExpiryDate] DATETIME2 NULL,
 
-    [IsRevoked] BIT NOT NULL DEFAULT 0,
+    [IsRevoked] BIT NULL,
 
     CONSTRAINT [FK_RefreshTokens_Users]
-    FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users]([Id])
+        FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users]([Id])
 );

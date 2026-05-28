@@ -3,7 +3,7 @@
   <Project Path="DataAcessLayer/PocoClasses.csproj" />
   <Project Path="MVCview/MVCview.csproj" />
   <Project Path="RBAC.Data/RBAC.Data.csproj" />
-  <Project Path="RBAC.Database/RBAC.Database.sqlproj" Id="c1dbb3dc-96fc-4dee-a096-4ef7e5e74745">
+  <Project Path="RBAC.Database.FromExisting/RBAC.Database.FromExisting.sqlproj" Id="73f95617-2fd1-4a93-99be-0266d99b5538">
     <Build />
     <Deploy />
   </Project>

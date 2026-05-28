@@ -1,0 +1,90 @@
+28-05-2026 10:17:40	This log contains information about the import schema operation into project 'RBAC.Database.FromExisting' on computer 'G7CR' by user 'MD KAIF ANSARI'.
+28-05-2026 10:17:40	Import of database schema has started.
+28-05-2026 10:18:06	Gathering database credentials
+28-05-2026 10:18:06	Gathering database options
+28-05-2026 10:18:06	Gathering generic database scoped configuration option
+28-05-2026 10:18:06	Gathering users
+28-05-2026 10:18:06	Gathering roles
+28-05-2026 10:18:06	Gathering application roles
+28-05-2026 10:18:06	Gathering role memberships
+28-05-2026 10:18:06	Gathering filegroups
+28-05-2026 10:18:06	Gathering full-text catalogs
+28-05-2026 10:18:06	Gathering assemblies
+28-05-2026 10:18:06	Gathering certificates
+28-05-2026 10:18:06	Gathering asymmetric keys
+28-05-2026 10:18:06	Gathering symmetric keys
+28-05-2026 10:18:06	Gathering encrypted symmetric keys
+28-05-2026 10:18:06	Gathering schemas
+28-05-2026 10:18:06	Gathering XML schema collections
+28-05-2026 10:18:06	Gathering user-defined data types
+28-05-2026 10:18:06	Gathering user-defined types
+28-05-2026 10:18:06	Gathering table types
+28-05-2026 10:18:06	Gathering unique keys for table types
+28-05-2026 10:18:06	Gathering primary keys for table types
+28-05-2026 10:18:07	Gathering indexes for table types
+28-05-2026 10:18:07	Gathering check constraints for table types
+28-05-2026 10:18:07	Gathering default constraints for table types
+28-05-2026 10:18:07	Gathering partition functions
+28-05-2026 10:18:07	Gathering partition schemes
+28-05-2026 10:18:07	Gathering functions
+28-05-2026 10:18:07	Gathering encrypted functions
+28-05-2026 10:18:07	Gathering aggregates
+28-05-2026 10:18:07	Gathering procedures
+28-05-2026 10:18:08	Gathering encrypted procedures
+28-05-2026 10:18:08	Gathering tables
+28-05-2026 10:18:08	Gathering primary keys
+28-05-2026 10:18:08	Gathering unique constraints
+28-05-2026 10:18:08	Gathering foreign keys
+28-05-2026 10:18:08	Gathering default constraints
+28-05-2026 10:18:08	Gathering check constraints
+28-05-2026 10:18:08	Gathering views
+28-05-2026 10:18:08	Gathering encrypted views
+28-05-2026 10:18:08	Gathering indexes
+28-05-2026 10:18:08	Gathering statistics
+28-05-2026 10:18:08	Gathering full-text index stoplists
+28-05-2026 10:18:08	Gathering search property lists
+28-05-2026 10:18:08	Gathering search properties
+28-05-2026 10:18:08	Gathering full-text indexes
+28-05-2026 10:18:08	Gathering column store indexes
+28-05-2026 10:18:08	Gathering spatial indexes
+28-05-2026 10:18:08	Gathering XML indexes
+28-05-2026 10:18:08	Gathering JSON indexes
+28-05-2026 10:18:08	Gathering Selective XML indexes
+28-05-2026 10:18:08	Gathering encrypted triggers
+28-05-2026 10:18:08	Gathering triggers
+28-05-2026 10:18:08	Gathering encrypted and clr ddl triggers
+28-05-2026 10:18:08	Gathering ddl triggers
+28-05-2026 10:18:08	Creating edge constraints
+28-05-2026 10:18:08	Gathering synonyms
+28-05-2026 10:18:08	Gathering defaults
+28-05-2026 10:18:08	Gathering data constraint uddt bindings
+28-05-2026 10:18:08	Gathering rules
+28-05-2026 10:18:08	Gathering data constraint uddt bindings
+28-05-2026 10:18:08	Gathering message types
+28-05-2026 10:18:08	Gathering queues
+28-05-2026 10:18:08	Gathering contracts
+28-05-2026 10:18:08	Gathering services
+28-05-2026 10:18:08	Gathering event notifications
+28-05-2026 10:18:08	Gathering remote service bindings
+28-05-2026 10:18:08	Gathering broker priorities
+28-05-2026 10:18:08	Gathering signatures
+28-05-2026 10:18:08	Gathering compression options
+28-05-2026 10:18:08	Gathering sequence types
+28-05-2026 10:18:08	Gathering security policies
+28-05-2026 10:18:08	Gather column encryption keys
+28-05-2026 10:18:08	Gathering column master keys
+28-05-2026 10:18:08	Gathering external data sources
+28-05-2026 10:18:08	Gathering external file formats
+28-05-2026 10:18:08	Gathering external models
+28-05-2026 10:18:08	Gathering external tables
+28-05-2026 10:18:08	Gathering XML index compression options
+28-05-2026 10:18:08	Gathering extended properties
+28-05-2026 10:18:08	Gathering assemblies
+28-05-2026 10:18:08	Gathering credentials
+28-05-2026 10:18:08	Gathering logins
+28-05-2026 10:18:08	Gathering server audits
+28-05-2026 10:18:09	Scanning project for duplicate elements
+28-05-2026 10:18:09	Finished duplicate element processing
+28-05-2026 10:18:09	Finished importing database.
+28-05-2026 10:18:09	A summary of the import was saved to the following location: C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database.FromExisting\Import Schema Logs\RBAC.Database.FromEx_20260528044740.log
+28-05-2026 10:18:09	Click Finish to continue...

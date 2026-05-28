@@ -19,7 +19,9 @@
     [IsLocked] BIT NOT NULL DEFAULT 0,
 
     [LockedAt] DATETIME2 NULL,
+CONSTRAINT [UQ_Users_Email]
+    UNIQUE ([Email]),
 
-    CONSTRAINT [FK_Users_Roles]
+CONSTRAINT [FK_Users_Roles]
     FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles]([Id])
 );

@@ -4,7 +4,3 @@ C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC
 C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database.FromExisting\obj\Debug\RBAC.Database.FromExisting.sqlproj.AssemblyReference.cache
 C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database.FromExisting\obj\Debug\RBAC.Database.FromExisting.dll
 C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database.FromExisting\obj\Debug\RBAC.Database.FromExisting.pdb
-C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database.FromExisting\obj\Debug\Model.xml
-C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database.FromExisting\obj\Debug\refactor.xml
-C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database.FromExisting\obj\Debug\postdeploy.sql
-C:\Users\MD KAIF ANSARI\OneDrive - G7 CR Technologies India Pvt Ltd\Desktop\RBAC_GIT_ADo\RoleBased\RBAC.Database.FromExisting\obj\Debug\predeploy.sql

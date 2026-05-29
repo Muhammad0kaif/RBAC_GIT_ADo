@@ -55,9 +55,10 @@
 
             <thead class="table-dark">
                 <tr>
-                    <th>Id</th>
+                   
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Role</th>
                     <th>Department</th>
                     <th>Actions</th>
                     <th>Status</th>
@@ -70,11 +71,25 @@
                 {
                     <tr>
 
-                        <td>@user.Id</td>
+                        
 
                         <td>@user.Name</td>
 
                         <td>@user.Email</td>
+                        <td>
+                            @if (user.RoleId == 1)
+                            {
+                                <span class="badge bg-danger">Admin</span>
+                            }
+                            else if (user.RoleId == 3)
+                            {
+                                <span class="badge bg-primary">Manager</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">User</span>
+                            }
+                        </td>
                         <td>
                             @if (!string.IsNullOrEmpty(user.DepartmentName))
                             {

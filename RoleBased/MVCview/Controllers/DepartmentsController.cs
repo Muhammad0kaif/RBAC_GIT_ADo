@@ -30,8 +30,28 @@ namespace MVCview.Controllers
                 return View(new List<DepartmentDto>());
             }
 
-            return View(apiResult.Data ?? new List<DepartmentDto>());
+            var departments = apiResult.Data ?? new List<DepartmentDto>();
+
+            if (role == "Manager")
+            {
+                var departmentIdText = HttpContext.Session.GetString("DepartmentId");
+
+                if (Guid.TryParse(departmentIdText, out Guid managerDepartmentId))
+                {
+                    departments = departments
+                        .Where(x => x.Id == managerDepartmentId)
+                        .ToList();
+                }
+                else
+                {
+                    departments = new List<DepartmentDto>();
+                    ViewBag.Error = "Your department is not assigned. Please contact admin.";
+                }
+            }
+
+            return View(departments);
         }
+
 
         public async Task<IActionResult> Users(Guid id)
         {
@@ -53,7 +73,7 @@ namespace MVCview.Controllers
 
             if (!apiResult.Success)
             {
-                TempData["Error"] = apiResult.Error;
+                TempData["Error"] = "You are not allowed to view users from this department.";
                 return RedirectToAction("Departments");
             }
 
